@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+      <link rel="stylesheet" href="https://unpkg.com/react-select/dist/react-select.css">
+	<style>
+		html,
+		body {
+			background-image: url(http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/asanoha-400px.png);
+		} 
+		#app {
+			display: block;
+			width: 522px;
+			background-color: rgba(255,255,255, .6);
+			margin: 40px auto;
+			padding: 5px;
+		}
+		.delete {
+			color: #bf2a5c;
+			cursor: pointer;
+		}
+		.over {
+			max-height: 500px;
+			overflow: auto;
+
+		}
+		.mycl:after {
+			content: '';
+			clear: both;
+			display: block;
+		}
+		.table tr:last-child {
+			border-bottom: 1px solid #eceeef;
+		}
+		.my-table th {
+			vertical-align: middle !important;
+			text-align: center;
+		}
+		.my-table th:first-child {
+			text-align: left;
+		}
+		.my-table td:first-child {
+			padding-left: 25px !important;
+			text-align: left;
+			width: 20px;
+		}
+		td {
+			text-align: center;
+		}
+		.select-mark .Select-menu-outer {
+			width: 60px;
+		}
+		.select-column,
+		.select-value {
+			width: 187px;
+		}
+		.filter-wrapper {
+			position: relative;
+			text-align: center;
+		}
+		.btn-wrapper {
+			position: absolute;
+			right: 0;
+			top: 0;
+			transform: translateY(-20px);
+		}
+		.btn-wrapper > * {
+			display: inline-block;
+		}
+		.add_filter_btn,
+		.reset_filter_btn {
+			color: #6E7A94;
+			margin-left: 8px;
+		}
+		.hidden {
+			display: none !important;
+		}
+		.Select-clear-zone {
+			display: none;
+		}
+	</style>
+	
+</head>
+<body>
+	<div id="app"></div>
+	<script src="bundle.js"></script>
+</body>
+</html>
