@@ -17,15 +17,9 @@ public class DBConn {
     public void connect() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        String url = "jdbc:mysql://localhost:3306/" + DBname;
-        try {
-            System.out.println("Was on");
+            String url = "jdbc:mysql://localhost:3306/" + DBname;
             conn = DriverManager.getConnection(url, "root", "19971809");
-
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -35,13 +29,8 @@ public class DBConn {
         try {
             stm = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             stm.executeUpdate ("INSERT INTO " + TableName + " VALUES()");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
             conn.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -50,7 +39,6 @@ public class DBConn {
         JSONArray jsnArr = new JSONArray();
         try {
             connect();
-            System.out.println("was get row " + TableName);
             Statement stm = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
             ResultSet res = null;
@@ -73,7 +61,6 @@ public class DBConn {
             stm.close();
             conn.close();
         } catch (SQLException e) {
-            System.out.println("Was error");
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
@@ -85,12 +72,10 @@ public class DBConn {
         try {
             Statement stm = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             try {
-                System.out.println(jsn.get("value"));
                 String query = "UPDATE " + TableName + " set " + jsn.get("column") + "=\"" + jsn.get("value") + "\" where id=" + jsn.get("id") + "";
                 stm.executeUpdate (query);
                 stm.close();
                 conn.close();
-                System.out.println(query);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -102,15 +87,16 @@ public class DBConn {
         try {
             JSONArray jsnArr = (JSONArray) jsn.get("rowsToDelete");
             String query = "DELETE FROM " + TableName + " where ";
+
             for(int i=0; i<jsnArr.length(); i++) {
                 query = query + "id=" + jsnArr.get(i);
-                System.out.println(jsnArr.get(i));
                 if(i<jsnArr.length()-1) {
                     query+=" OR ";
                 }
             }
 
             connect();
+
             try {
                 Statement stm = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 stm.executeUpdate (query);
@@ -135,11 +121,9 @@ public class DBConn {
             while (rs.next()) {
                 jsnArr.put(rs.getString(3));
             }
+            jsn.put("tables", jsnArr);
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        try {
-            jsn.put("tables", jsnArr);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -156,7 +140,6 @@ public class DBConn {
                     query+=" OR ";
                 }
             }
-            System.out.println(query);
             return getRows(TableName, query);
         } catch (JSONException e) {
             e.printStackTrace();
